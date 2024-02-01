@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: homeassistant
+  name: homeassistant
+  namespace: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homeassistant
+  template:
+    metadata:
+      labels:
+        app: homeassistant
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        kubernetes.io/hostname: hp-elitedesk
+      volumes:
+        - name: ha-storage
+          persistentVolumeClaim:
+            claimName: ha-pvc
+      containers:
+        - image: ghcr.io/home-assistant/home-assistant:2023.7
+          name: home-assistant
+          volumeMounts:
+            - mountPath: "/config"
+              name: ha-storage
+          ports:
+            - containerPort: 8123
+              name: http
+              protocol: TCP
