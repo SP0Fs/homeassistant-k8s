@@ -29,3 +29,13 @@ spec:
                 name: homeassistant
                 port:
                   number: 8123
+    - host: home.leibold.tech
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: homeassistant
+                port:
+                  number: 8123
