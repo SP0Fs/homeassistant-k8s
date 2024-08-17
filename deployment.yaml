@@ -23,7 +23,7 @@ spec:
           persistentVolumeClaim:
             claimName: ha-pvc
       containers:
-        - image: ghcr.io/home-assistant/home-assistant:2024.6.3
+        - image: ghcr.io/home-assistant/home-assistant:2024.8
           name: home-assistant
           volumeMounts:
             - mountPath: "/config"
