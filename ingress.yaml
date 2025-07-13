@@ -15,20 +15,9 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - home.spof.tech
         - home.leibold.tech
       secretName: ha-certs
   rules:
-    - host: home.spof.tech
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: homeassistant
-                port:
-                  number: 8123
     - host: home.leibold.tech
       http:
         paths:
