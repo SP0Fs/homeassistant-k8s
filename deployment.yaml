@@ -26,6 +26,13 @@ spec:
         - image: ghcr.io/home-assistant/home-assistant:stable
           imagePullPolicy: Always
           name: home-assistant
+          resources:
+            requests:
+              cpu: 2
+              memory: 3GB
+            limits:
+              cpu: 4
+              memory: 6GB
           volumeMounts:
             - mountPath: "/config"
               name: ha-storage
