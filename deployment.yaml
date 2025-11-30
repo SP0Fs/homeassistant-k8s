@@ -28,11 +28,11 @@ spec:
           name: home-assistant
           resources:
             requests:
-              cpu: 2
-              memory: 3GB
+              cpu: "2"
+              memory: "3GB"
             limits:
-              cpu: 4
-              memory: 6GB
+              cpu: "4"
+              memory: "6GB"
           volumeMounts:
             - mountPath: "/config"
               name: ha-storage
