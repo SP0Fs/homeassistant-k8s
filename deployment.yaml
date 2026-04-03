@@ -39,10 +39,5 @@ spec:
             - containerPort: 8123
               name: http
               protocol: TCP
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /bin/bash
-                  - -c
-                  - "wget -O - https://get.hacs.xyz | bash -"
+          # HACS is already installed on the PVC. To reinstall, exec into the pod:
+          # wget -O - https://get.hacs.xyz | bash -
