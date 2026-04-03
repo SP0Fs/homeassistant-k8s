@@ -21,6 +21,24 @@ spec:
         - name: ha-storage
           persistentVolumeClaim:
             claimName: ha-pvc
+        - name: ha-lock
+          emptyDir:
+            medium: Memory
+      initContainers:
+        - name: fix-nfs-lock
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              rm -f /config/.ha_run.lock
+              touch /lock/.ha_run.lock
+              ln -sf /lock/.ha_run.lock /config/.ha_run.lock
+          volumeMounts:
+            - mountPath: "/config"
+              name: ha-storage
+            - mountPath: "/lock"
+              name: ha-lock
       containers:
         - image: ghcr.io/home-assistant/home-assistant:stable
           imagePullPolicy: Always
@@ -35,6 +53,8 @@ spec:
           volumeMounts:
             - mountPath: "/config"
               name: ha-storage
+            - mountPath: "/lock"
+              name: ha-lock
           ports:
             - containerPort: 8123
               name: http
